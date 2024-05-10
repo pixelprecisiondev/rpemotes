@@ -20,6 +20,7 @@ local PtfxNoProp = false
 local AnimationThreadStatus = false
 local CanCancel = true
 local Pointing = false
+local currentEmote = {}
 
 local function RunAnimationThread()
     if AnimationThreadStatus then return end
@@ -233,6 +234,7 @@ function EmoteCancel(force)
         IsInAnimation = false
     end
     AnimationThreadStatus = false
+    currentEmote = nil
 end
 
 function EmoteChatMessage(msg, multiline)
@@ -632,7 +634,7 @@ function OnEmotePlay(EmoteName, textureVariation)
     RunAnimationThread()
     MostRecentDict = ChosenDict
     MostRecentAnimation = ChosenAnimation
-	
+    currentEmote = EmoteName
     if EmoteName.AnimationOptions then
         if EmoteName.AnimationOptions.Prop then
             PropName = EmoteName.AnimationOptions.Prop
@@ -675,4 +677,7 @@ end)
 exports("EmoteCancel", EmoteCancel)
 exports("CanCancelEmote", function(State)
 		CanCancel = State == true
+end)
+exports('getCurrentEmote', function()
+		return currentEmote
 end)
