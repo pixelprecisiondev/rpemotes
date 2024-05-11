@@ -1,3 +1,5 @@
+rpemotes modified to use in https://github.com/pixelprecisiondev/pp-adjustanim
+
 # RpEmotes 🏋️
 
 RpEmotes is a community driven FiveM emote menu allowing players to express themselves in roleplay with custom animations, countless facial expressions, walkstyles and props, originally created by [DullPear](https://github.com/andristum/dpemotes).
