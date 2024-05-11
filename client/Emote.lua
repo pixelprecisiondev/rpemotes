@@ -634,7 +634,16 @@ function OnEmotePlay(EmoteName, textureVariation)
     RunAnimationThread()
     MostRecentDict = ChosenDict
     MostRecentAnimation = ChosenAnimation
-    currentEmote = EmoteName
+    local currentEmoteTable = EmoteName
+    for _, tabledata in pairs(RP) do
+        for command, emotedata in pairs(tabledata) do
+            if emotedata == EmoteName then
+                table.insert(currentEmoteTable, command)
+                break
+            end
+        end
+    end
+    currentEmote = currentEmoteTable
     if EmoteName.AnimationOptions then
         if EmoteName.AnimationOptions.Prop then
             PropName = EmoteName.AnimationOptions.Prop
@@ -672,12 +681,12 @@ end
 -----------------------------------------------------------------------------------------------------
 
 exports("EmoteCommandStart", function(emoteName, textureVariation)
-        EmoteCommandStart(nil, {emoteName, textureVariation}, nil)
+    EmoteCommandStart(nil, {emoteName, textureVariation}, nil)
 end)
 exports("EmoteCancel", EmoteCancel)
 exports("CanCancelEmote", function(State)
-		CanCancel = State == true
+	CanCancel = State == true
 end)
 exports('getCurrentEmote', function()
-		return currentEmote
+	return currentEmote
 end)
